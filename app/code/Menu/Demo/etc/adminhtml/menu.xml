@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Menu_Demo::NewOne" title="Menu item name" module="Menu_Demo" sortOrder="10" resource="Menu_Demo::NewOne"/>
+        <add id="Menu_Demo::OldOne" title="Menu item" parent="Menu_Demo::NewOne" module="Menu_Demo" sortOrder="10" action="menu/test/demo" resource="Menu_Demo::OldOne"/>
+    </menu>
+</config>

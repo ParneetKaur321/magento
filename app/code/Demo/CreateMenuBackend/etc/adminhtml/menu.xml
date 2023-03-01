@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+   <menu>
+       <add id="Demo_CreateMenuBackend::menu"
+           title="Demo Menu" module="Demo_CreateMenuBackend"
+           sortOrder="10"
+           resource="Magento_Backend::content"
+           />
+
+             <add id="Demo_CreateMenuBackend::menu_item"
+           title="Demo Items" module="Demo_CreateMenuBackend"
+           sortOrder="10" parent="Demo_CreateMenuBackend::menu"
+           action="Createmenubackend/Create/Index"
+           resource="Demo_CreateMenuBackend::menu_item"
+           />
+   </menu>
+</config>
