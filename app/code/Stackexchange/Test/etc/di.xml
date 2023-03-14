@@ -1,4 +1,5 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
-    <preference for="Stackexchange\Test\Api\TestInterface" type="Stackexchange\Test\Model\Test" />
+    <preference for="Stackexchange\Test\Api\Data\DataInterface" type="Stackexchange\Test\Model\Grid" />
+    <preference for="Stackexchange\Test\Api\TestInterface" type="Stackexchange\Test\Model\Test"/>
 </config>

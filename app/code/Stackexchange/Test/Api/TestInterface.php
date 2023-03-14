@@ -4,12 +4,16 @@ namespace Stackexchange\Test\Api;
 interface TestInterface
 {
 
-    /**
-     * POST for test api
-     * @param string[] $data
-     * @return string
+     /**
+     * Save for Post api
+     *
+     * @api
+     * @param \Stackexchange\Test\Api\Data\DataInterface $data
+     *
+     * @return \Stackexchange\Test\Api\Data\DataInterface
+     * @throws \Magento\Framework\Exception\LocalizedException
      */
 
-  public function setData($data);
+  public function set($data);
 
 }

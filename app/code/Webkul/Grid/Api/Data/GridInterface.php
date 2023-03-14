@@ -40,7 +40,7 @@ interface GridInterface
     *
     * @return mixed
     */
-    public function getTitle();
+   public function getTitle(); 
 
    /**
     * Set Title.

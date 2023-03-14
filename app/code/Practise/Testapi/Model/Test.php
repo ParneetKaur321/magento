@@ -1,5 +1,5 @@
 <?php
-namespace Stackexchange\Test\Model;
+namespace Practise\Testapi\Model;
 
 use Psr\Log\LoggerInterface;
 class Test 
@@ -9,7 +9,7 @@ class Test
  
     public function __construct(
         LoggerInterface $logger,
-        \Stackexchange\Test\Model\GridFactory $gridFactory
+        \Practise\Testapi\Model\GridFactory $gridFactory
     )
     {
         $this->logger = $logger;
@@ -18,11 +18,12 @@ class Test
      /**
      * {@inheritdoc}
      */
-    public function set($data)
+    public function storeData($data)
     {   
     $name = $data->getName();
         // echo "this ydcfj";
-        // exit;
+        
+    
        
         $data = ['name' => $name];
 
@@ -42,6 +43,4 @@ class Test
         return $returnArray; 
         return 'successfully saved';
     }
-
-
 }
