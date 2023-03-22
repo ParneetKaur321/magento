@@ -57,9 +57,8 @@ class Enquiry extends \Magento\Framework\View\Element\Template
             // LOGO------------------------------------------------------
 
             $imageFile ='/var/www/html/magento/app/code/Test/Task/view/frontend/web/images/logo.png';
-            $logoPath = \Zend_Pdf_Image::imageWithPath($imageFile);
-            $page->drawImage($logoPath, 25, 750, 300, 825);
-
+            $pathImage = \Zend_Pdf_Image::imageWithPath($imageFile);
+            $page->drawImage($pathImage, 25, 750, 300, 825);
 
             // PRODUCT IMAGE------------------------------------------------
            
@@ -81,12 +80,11 @@ class Enquiry extends \Magento\Framework\View\Element\Template
             $page->drawText(__("Magento Test "), ($page->getWidth()/2)-50, $this->y-600);
             
             // PDF -----------------------------------------------
-
-            $pdfData = $pdf->render(); // Get PDF document as a string 
-            // header("DirectoryList::MEDIA");
-            header("Content-Disposition: inline; filename=product.pdf; DirectoryList::PUB"); 
-            header("Content-type: application/x-pdf"); 
-            echo $pdfData; 
+            
+            $fileName= "product.pdf";
+            $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+            $fileFactory = $objectManager->get('Magento\Framework\App\Response\Http\FileFactory');
+            $fileFactory->create($fileName,$pdf->render(),\Magento\Framework\App\Filesystem\DirectoryList::MEDIA,'application/pdf');
 
         }
     }
