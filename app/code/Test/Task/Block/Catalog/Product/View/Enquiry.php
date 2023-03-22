@@ -60,6 +60,7 @@ class Enquiry extends \Magento\Framework\View\Element\Template
             $logoPath = \Zend_Pdf_Image::imageWithPath($imageFile);
             $page->drawImage($logoPath, 25, 750, 300, 825);
 
+
             // PRODUCT IMAGE------------------------------------------------
            
             $imageFile ='/var/www/html/magento/pub/media/catalog/product'.$image;
@@ -81,7 +82,6 @@ class Enquiry extends \Magento\Framework\View\Element\Template
             
             // PDF -----------------------------------------------
 
-           
             $pdfData = $pdf->render(); // Get PDF document as a string 
             // header("DirectoryList::MEDIA");
             header("Content-Disposition: inline; filename=product.pdf; DirectoryList::PUB"); 
