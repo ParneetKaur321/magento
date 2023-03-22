@@ -23,7 +23,7 @@ class Test
     $name = $data->getName();
         // echo "this ydcfj";
         // exit;
-       
+    
         $data = ['name' => $name];
 
         try {
