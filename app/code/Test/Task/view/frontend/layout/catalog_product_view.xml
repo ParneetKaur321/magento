@@ -4,11 +4,5 @@
         <referenceContainer name="content">
             <block class="Test\Task\Block\Catalog\Product\View\Enquiry" name="product.info.enquiry" after="product.info.addtocart" template="Test_Task::catalog/product/view/file.phtml" />
         </referenceContainer>
-
-       <!-- <container name="additional.container" htmlTag="div" htmlClass="container"></container>
-            <move element="product.info.enquiry" destination="additional.container"/>
-            <move element="additional.container" destination="product.info.form.content" after="product.info.addtocart"/> -->
-    
-     
     </body>
 </page>

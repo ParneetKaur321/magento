@@ -1,6 +1,7 @@
 <?php
 /** @var \Test\Task\Block\Template $block */
 use Test\Task\Block\Catalog\Product\View;
+
 ?>
 
 <style>
@@ -30,7 +31,7 @@ if(isset($_POST['printdata'])){
     
     // redirect to function 
     $blockObj= $block->getLayout()->createBlock('Test\Task\Block\Catalog\Product\View\Enquiry');
-    echo $blockObj->getMessage();  
+    echo $blockObj->getMessage(); 
 
 }
    
