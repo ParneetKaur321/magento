@@ -15,7 +15,7 @@ class Enquiry extends \Magento\Framework\View\Element\Template
     public $filesystem;
     protected $directory;
     protected $fileFactory;
-
+    
     public function __construct(
         \Magento\Framework\View\Element\Template\Context $context,
         FileFactory $fileFactory,
@@ -39,7 +39,7 @@ class Enquiry extends \Magento\Framework\View\Element\Template
         return $this->_registry->registry('current_product');
     } 
    
-    
+
     // FUNCTION FOR PDF------------------
     
     public function getMessage(){
