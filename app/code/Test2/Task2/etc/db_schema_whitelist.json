@@ -1,0 +1,10 @@
+{
+    "sales_order": {
+        "column": {
+            "device": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}

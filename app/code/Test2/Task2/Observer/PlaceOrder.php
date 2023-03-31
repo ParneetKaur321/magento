@@ -4,11 +4,14 @@ use Magento\Framework\Event\ObserverInterface;
 class PlaceOrder implements ObserverInterface
 {   
     protected $_logger;
+    protected $_storeManager;
 
     public function __construct    (
-        \Psr\Log\LoggerInterface $logger
+        \Psr\Log\LoggerInterface $logger,
+        \Magento\Store\Model\StoreManagerInterface $storeManager
     ) 
     { 
+        $this->_storeManager = $storeManager;
         $this->_logger = $logger;    
     }
 
@@ -16,8 +19,11 @@ class PlaceOrder implements ObserverInterface
     
     public function getAuthToken(){
 
-        $url = "http://127.0.0.1/magento/index.php/rest";
-        $token_url = $url."/V1/integration/admin/token";
+        // GET BASE URL----------------------------
+
+        $store= $this->_storeManager->getStore()->getBaseUrl();
+
+        $token_url = $store."rest/V1/integration/admin/token";
         $username = "admin";
         $password = "admin123";
 
@@ -46,11 +52,16 @@ class PlaceOrder implements ObserverInterface
         // $writer = new \Zend_Log_Writer_Stream(BP . '/var/log/custom.log');
         // $logger = new \Zend_Log();
         // $logger->addWriter($writer);
+        
+        // GET BASE URL---------------------------
+
+        $store= $this->_storeManager->getStore()->getBaseUrl();
 
         // DETECT DEVICE----------------------------
-       
+     
         $isMob = is_numeric(strpos(strtolower($_SERVER["HTTP_USER_AGENT"]), "mobile")); 
- 
+        $orderId = $observer->getEvent()->getOrder()->getId();
+
         if($isMob){ 
             $devvice = "M";
         }
@@ -58,10 +69,12 @@ class PlaceOrder implements ObserverInterface
             $devvice = "D";
         }
 
-        $orderId = $observer->getEvent()->getOrder()->getId();
+        $arr['entity']['entity_id'] = $orderId;
+        $arr['entity']['extension_attributes']['device']= $devvice;
+
         $curl = curl_init();
         curl_setopt_array($curl, array(
-        CURLOPT_URL => 'http://127.0.0.1/magento/index.php/rest/V1/orders?entity_id='.$orderId,
+        CURLOPT_URL => $store.'rest/V1/orders?entity_id='.$orderId,
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => '',
         CURLOPT_MAXREDIRS => 10,
@@ -69,14 +82,7 @@ class PlaceOrder implements ObserverInterface
         CURLOPT_FOLLOWLOCATION => true,
         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
         CURLOPT_CUSTOMREQUEST => 'POST',
-        CURLOPT_POSTFIELDS =>'{
-            "entity": {
-                "entity_id": '.$orderId.',
-                "extension_attributes": {
-                    "device": "'.$devvice.'"
-                }
-            }
-        }',
+        CURLOPT_POSTFIELDS =>json_encode($arr),
         CURLOPT_HTTPHEADER => array(
             'Authorization: Bearer '.$this->getAuthToken().'',
             'Content-Type: application/json',
